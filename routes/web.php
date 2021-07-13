@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+
+Route::get('profile',[ProfileController::class,'create'])->middleware('auth');
+Route::Post('profile',[ProfileController::class,'store'])->middleware('auth');
 
 Route::get('register',[RegisterController::class,'create'])->middleware('guest');
 Route::post('register',[RegisterController::class,'store'])->middleware('guest');

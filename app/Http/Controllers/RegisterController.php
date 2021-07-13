@@ -9,11 +9,16 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
 
+    // register view
     public function create(){
 
         return view('register.create');
     }
 
+
+
+
+    // check register info and register
     public function store(){
 
 
@@ -23,10 +28,17 @@ class RegisterController extends Controller
            'password'=>'required'
            ]);
 
+      $attributes['password']=bcrypt($attributes['password']);
+
        $user= User::create($attributes);
 
-       auth()->login($user);
+       // assign role for regular user
+         $user->assignRole('user');
 
-       return redirect('/')->with('success','Your account has been created.');
+          auth()->login($user);
+
+
+           return redirect('/')->with('success', 'Your account has been created.');
+
     }
 }
