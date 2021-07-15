@@ -3,46 +3,38 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\LoginPostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+
 
 class SessionsController extends Controller
 {
 
     //login view
-    public function create(){
+    public function index(){
         return view('sessions.create');
     }
 
 
     // check login info and login
-    public function store()
+    public function store(LoginPostRequest $request)
     {
-    $attributes= request()->validate([
-        'username'=>'required',
-        'password'=>'required'
-    ]);
+        $credentials = $request -> only('username' , 'password');
 
-    if(auth()->attempt($attributes)) {
-       session()->regenerate();
-        if(auth()->user()->hasRole('user')) {
-            return redirect('/')->with('success', 'Welcome User');
+        if (auth() -> attempt($credentials)) {
+            session() -> regenerate();
+            return redirect('/') -> with('success' , 'Welcome');
         }
-        elseif (auth()->user()->hasRole('admin')){
-            return redirect('/')->with('success', 'Welcome Admin');
-        }
-
-
-    }
-   throw ValidationException::withMessages(['username'=>'Your username or password are not correct']);
-
+        else throw ValidationException ::withMessages(['msg' => 'Your provided incorrect credentials']);
     }
 
 
-    //log out
+    //logout
     public function destroy()
     {
         auth()->logout();
-        return redirect('/login')->with('success','You have successfully logout');
+        return redirect('/login')
+            ->with('success','You have successfully logout');
     }
 }

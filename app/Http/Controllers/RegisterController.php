@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\RegisterPostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,35 +12,26 @@ class RegisterController extends Controller
 {
 
     // register view
-    public function create(){
+    public function index(){
 
         return view('register.create');
     }
 
 
-
-
     // check register info and register
-    public function store(){
+    public function store (RegisterPostRequest $request)
+    {
 
+        $credentials = $request -> only('username' , 'email' , 'password');
+        $credentials['password'] = bcrypt($credentials['password']);
+        $credentials['role'] = 'user';
 
-      $attributes = request()->validate([
-           'username'=>'required|min:3|unique:users,username|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-           'email'=>'required|email|unique:users,email',
-           'password'=>'required'
-           ]);
+        $user = User ::create($credentials);
+        $user -> assignRole('user');
+        auth() -> login($user);
 
-      $attributes['password']=bcrypt($attributes['password']);
-
-       $user= User::create($attributes);
-
-       // assign role for regular user
-         $user->assignRole('user');
-
-          auth()->login($user);
-
-
-           return redirect('/')->with('success', 'Your account has been created.');
+        return redirect('/')
+            -> with('success' , 'Your account has been created.');
 
     }
 }
