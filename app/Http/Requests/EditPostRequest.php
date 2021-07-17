@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ProfilePostRequest extends FormRequest
+class EditPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class ProfilePostRequest extends FormRequest
      */
     public function rules()
     {
-        $userid=Auth::id();
+        $userid = FormRequest::input('userid');
+
         return [
             'username'=>"required|min:3|unique:users,username,$userid|regex:/(^([a-zA-Z]+)(\d+)?$)/u",
             'email'=>"required|email",

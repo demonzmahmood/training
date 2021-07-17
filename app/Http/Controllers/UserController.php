@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfilePostRequest;
+use App\Http\Requests\EditPostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
 
     //profile view
@@ -19,13 +19,13 @@ class ProfileController extends Controller
 
 
     // profile info and update
-    public function store (ProfilePostRequest $request) // request $rq
+    public function store(EditPostRequest $request) // request $rq
     {
         $credentials = $request->only('username' , 'email');
-        User::where('id' , auth()->user()->id)
+        User::where('id' , auth()->id())
             ->update(['username' => $credentials['username'] , 'email' => $credentials['email']]);
 
-        return redirect('/profile')
+        return redirect('/user')
             ->with('success' , 'Your Profile has been updated.');
     }
 

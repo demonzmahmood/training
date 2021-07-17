@@ -13,6 +13,7 @@ class SessionsController extends Controller
 
     //login view
     public function index(){
+
         return view('sessions.create');
     }
 

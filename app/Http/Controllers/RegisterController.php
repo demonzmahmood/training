@@ -21,7 +21,6 @@ class RegisterController extends Controller
     // check register info and register
     public function store (RegisterPostRequest $request)
     {
-
         $credentials = $request -> only('username' , 'email' , 'password');
         $credentials['password'] = bcrypt($credentials['password']);
         $credentials['role'] = 'user';
