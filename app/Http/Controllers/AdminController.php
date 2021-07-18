@@ -43,10 +43,10 @@ class AdminController extends Controller
             case 'update':
                 $credentials= $request->except('operation');
                 $user=User::find($credentials['userid']);
+                $hashpass = $user->password;
 
-
-                if(password_verify($credentials['password'],$credentials['currentpass'])||trim($credentials['password'])==''){
-                    $credentials['password'] = $credentials['currentpass'];}
+                if(password_verify($credentials['password'],$hashpass)||trim($credentials['password'])==''){
+                    $credentials['password'] = $hashpass;}
                 else {
                     $credentials['password'] = bcrypt($credentials['password']);
                 }

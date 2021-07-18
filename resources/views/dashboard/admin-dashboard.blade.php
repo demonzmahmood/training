@@ -100,7 +100,6 @@
                                        name="password"
                                        id="password"
                                        >
-                                <input type="hidden" name="currentpass" value="{{$data['password']}}">
                                 @error('password')
                                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                                 @enderror
