@@ -42,15 +42,20 @@ class AdminController extends Controller
 
             case 'update':
                 $credentials= $request->except('operation');
-                $pass = User::find($credentials['userid'])->password;
-                if($credentials['password']!=$pass) {
+                $user=User::find($credentials['userid']);
+
+
+                if(password_verify($credentials['password'],$credentials['currentpass'])||trim($credentials['password'])==''){
+                    $credentials['password'] = $credentials['currentpass'];}
+                else {
                     $credentials['password'] = bcrypt($credentials['password']);
                 }
 
 
                User::where('id', $credentials['userid'])
                     ->update(['username' => $credentials['username'], 'email' => $credentials['email'],'password'=>$credentials['password'],'role'=>$credentials['role']]);
-                $user=User::find($credentials['userid']);
+
+
 
                 if ($credentials['role']=='user') {
                   $user->syncRoles(['user']);
@@ -58,6 +63,7 @@ class AdminController extends Controller
                 elseif ($credentials['role']=='admin'){
                     $user->syncRoles(['admin']);
                 }
+
 
                 return redirect('/admin')
                     ->with('success', 'User Profile has been updated.');

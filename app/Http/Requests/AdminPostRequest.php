@@ -29,7 +29,7 @@ class AdminPostRequest extends FormRequest
                 $userid = FormRequest::input('userid');
                 return ['username' => "required|min:3|unique:users,username,$userid|regex:/(^([a-zA-Z]+)(\d+)?$)/u",
                     'email' => "required|email",
-                    'password' => "required|min:3",
+                    'password' => "nullable|min:3",
                     'role' => "required",
                     ];
 
