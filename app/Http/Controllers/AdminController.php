@@ -53,7 +53,7 @@ class AdminController extends Controller
     public function show(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::all();
+            $data = User::select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
