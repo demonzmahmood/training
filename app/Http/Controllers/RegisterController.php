@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterPostRequest;
 use App\Models\User;
+use App\Notifications\WelcomeEmailNotification;
 use Illuminate\Http\Request;
 
 
@@ -34,3 +35,5 @@ class RegisterController extends Controller
 
     }
 }
+
+

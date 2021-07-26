@@ -7,58 +7,73 @@
 
                     <div class="mb-6">
                         <a href="/admin/edit-users" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Edit Users</a>
-                        <a href="/admin/edit-admins" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Edit Admins</a>
                         <a href="/admin/create" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Create new User</a>
                     </div>
 
 
 
                     <!-- retrieve the information of current users.-->
-                    @if(isset($users))
-                        <div class="mb-6">
-                            <table class="text-center w-full border-collapse border border-green-800 ...">
+                    @if(isset($datatable))
+                        <div class="container" style="margin-top: 50px;">
+                            <table class="table table-bordered" id="data-table">
                                 <thead>
-                            <tr>
-                                <th class="border border-green-600 ...">Id</th>
-                                <th class="border border-green-600 ...">Username</th>
-                                <th class="border border-green-600 ...">Email</th>
-                                <th class="border border-green-600 ..." colspan="2">Operations</th>
-                            </tr>
-                                </thead>
-
-                                <tbody>
-                            @foreach($users as $user)
-
                                 <tr>
-                                    <td class="border border-green-600 ...">{{$user['id']}}</td>
-                                    <td class="border border-green-600 ...">{{$user['username']}}</td>
-                                    <td class="border border-green-600 ...">{{$user['email']}}</td>
-                                    <td class="border border-green-600 ...">
-                                        <button class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
-                                            <a href="/admin/{{$user['id']}}/edit">edit</a>
-                                        </button>
-                                    </td>
-                                    <td class="border border-green-600 ...">
-                                        <form method="post" action="/admin/{{$user['id']}}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">delete</button>
-                                        </form>
-                                    </td>
-
+                                    <th>No</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th width="100px">Action</th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody>
                                 </tbody>
-                        </table>
+                            </table>
                         </div>
-                    @endif
-                <!--  |--------------------------------------------------------------------------End of list of users . -->
 
+                        <script type="text/javascript">
+                            $(function() {
+
+                                var table = $('#data-table').DataTable({
+                                    processing: true,
+                                    serverSide: true,
+                                    ajax: '{{url("admin/edit-users")}}',
+                                    columns: [{
+                                        data: 'id',
+                                        name: 'id'
+                                    },
+                                        {
+                                            data: 'username',
+                                            name: 'username'
+                                        },
+                                        {
+                                            data: 'email',
+                                            name: 'email'
+                                        },
+                                        {
+                                            data: 'role',
+                                            name: 'role'
+                                        },
+                                        {
+                                            data: 'action',
+                                            name: 'action',
+                                            orderable: false,
+                                            searchable: false
+                                        },
+                                    ]
+                                });
+
+                            });
+                        </script>
+
+                    @endif
+
+                <!--  |--------------------------------------------------------------------------End of list of users . -->
 
                 <!--  a form to edit specific user data -->
                     @if(isset($data))
-                        <form action="/admin" method="post">
+                        <form action="/admin/{{$data['id']}}" method="post">
                             @csrf
+                            @method('PUT')
                             <div class="mb-6">
                                 <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="username">
                                     username :
@@ -121,7 +136,7 @@
 
                             <div class="mb-6">
                                 <input type="hidden" name="userid" value={{$data['id']}}>
-                                <button type="submit" name="operation" value="update" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
+                                <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
                                     Submit
                                 </button>
                             </div>

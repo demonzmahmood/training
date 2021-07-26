@@ -26,7 +26,8 @@ class RegisterPostRequest extends FormRequest
         return [
             'username'=>"required|min:3|unique:users,username|regex:/(^([a-zA-Z]+)(\d+)?$)/u",
             'email'=>"required|email",
-            'password'=>"required"
+            'password'=>"required|regex:/^(?=.*\d)(?=.*[a-zA-Z]).{4,8}$/",
+            'role'=>'required'
         ];
     }
 }

@@ -36,6 +36,7 @@ Route::group(['middleware' => 'guest'], function() {
     Route::resource('login', SessionsController::class)->only(['index', 'store']);
 });
 
+
 Route::group(['middleware' => 'auth'], function() {
     Route::post('logout',[SessionsController::class,'destroy']);
 });
@@ -45,8 +46,14 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 
+
 // admin crud change them to one line
 // do create users/create admins
+
+
 //Route::resource('admin', AdminController::class)->only(['index', 'store','create','show'])->middleware('auth');
 //Route::get('admin/delete/{id}',[AdminController::class,'delete'])->middleware('auth');
 //Route::get('admin/edit/{id}',[AdminController::class,'showdata'])->middleware('auth');
+
+
+
