@@ -29,7 +29,7 @@ class UpdatePostRequest extends FormRequest
                 return [
                     'username' => "required|min:3|unique:users,username,$userid|regex:/(^([a-zA-Z]+)(\d+)?$)/u",
                     'email' => "required|email",
-                    'password' => "sometimes|regex:/^(?=.*\d)(?=.*[a-zA-Z]).{4,8}$/",
+                    'password' => "sometimes",
                     'role' => "required",
                     'userid'=>"required",
                     ];

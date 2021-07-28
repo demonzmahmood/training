@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterPostRequest extends FormRequest
+class AdminRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,7 @@ class RegisterPostRequest extends FormRequest
             'username'=>"required|min:3|unique:users,username|regex:/(^([a-zA-Z]+)(\d+)?$)/u",
             'email'=>"required|email",
             'password'=>"required",
+            'role'=>"required"
         ];
     }
 }

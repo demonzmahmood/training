@@ -20,22 +20,30 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
-<body style="font-family: Open Sans, sans-serif">
+<body style="font-family: Open Sans, sans-serif"  >
 
 
-<section class="px-6 py-8">
+<section class="px-6 py-8" dir="{{(App::isLocale('ar') ? 'rtl' : 'ltr')}}" style="{{(App::isLocale('ar') ? 'text-align:right' : 'text-align:left')}}">
 
-
+    <ul>
+        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            <li>
+                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    {{ $properties['native'] }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
 
     <div class="mt-8 md:mt-0">
 
         @auth
-            <span class="text-lg front-bold uppercase">welcome, {{auth()->user()->username}}</span>
+            <span class="text-lg front-bold uppercase">{{trans('translation.Welcome')}} , {{auth()->user()->username}}</span>
 
             <form method="POST" action="/logout">
                 @csrf
 
-                <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Log Out</button>
+                <button  type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.LogOut')}}</button>
             </form>
         @endauth
 

@@ -12,6 +12,7 @@
         "itsgoingd/clockwork": "^5.0",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "mcamara/laravel-localization": "^1.6",
         "spatie/laravel-permission": "^4.2",
         "yajra/laravel-datatables-buttons": "^4.0",
         "yajra/laravel-datatables-oracle": "~9.0"

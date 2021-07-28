@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterPostRequest;
+use App\Http\Requests\AdminRegisterRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class AdminController extends Controller
 
 
 
-    public function store(RegisterPostRequest $request)
+    public function store(AdminRegisterRequest $request)
     {
 
         $credentials = $request->validated();
@@ -57,10 +57,10 @@ class AdminController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = "<a href=/admin/" . $row->id . "/edit" . " class='edit btn btn-primary btn-sm'>View</a>";
+                    $btn = "<a href=/admin/" . $row->id . "/edit" . " class='edit btn btn-primary btn-sm'>". __('translation.View')."</a>";
                     $btn2 = "<form method='post' action='/admin/$row->id' style = 'display:inline'>
                             " . csrf_field() . method_field('DELETE') . "
-                                <button type='submit' class='delete btn btn-danger btn-sm'>delete</button>
+                                <button type='submit' class='delete btn btn-danger btn-sm'>". __('translation.Delete')."</button>
                            </form>";
 
 

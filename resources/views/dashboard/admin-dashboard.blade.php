@@ -3,11 +3,11 @@
 
             <div class="container">
                 <main class=" mx-auto bg-gray-100 border-gray-200 p-6 rounded-xl ">
-                <h1 class="text-center font-bold text-xl">Admin Panel</h1>
+                <h1 class="text-center font-bold text-xl">{{trans('translation.Dashboard')}}</h1>
 
                     <div class="mb-6">
-                        <a href="/admin/edit-users" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Edit Users</a>
-                        <a href="/admin/create" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Create new User</a>
+                        <a href="/admin/edit-users" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.EditUsers')}}</a>
+                        <a href="/admin/create" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.CreateUser')}}</a>
                     </div>
 
 
@@ -18,11 +18,12 @@
                             <table class="table table-bordered" id="data-table">
                                 <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th width="100px">Action</th>
+                                    <th>{{trans('translation.No')}}</th>
+                                    <th>{{trans('translation.Username')}}</th>
+                                    <th>{{trans('translation.Email')}}</th>
+                                    <th>{{trans('translation.Role')}}</th>
+                                    <th width="100px">{{trans('translation.Action')}}</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,8 +76,8 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="username">
-                                    username :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="username">
+                                    {{trans('translation.Username')}} :
                                 </label>
                                 <input class="border border-gray-400 p-2 w-full"
                                        type="text"
@@ -84,15 +85,15 @@
                                        id="username"
                                        value="{{$data['username']}}">
                                 @error('username')
-                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                <p class="text-red-500 text-md mt-1">{{$message}}</p>
                                 @enderror
 
                             </div>
 
 
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
-                                    email :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="email">
+                                    {{trans('translation.Email')}} :
                                 </label>
                                 <input class="border border-gray-400 p-2 w-full"
                                        type="email"
@@ -100,15 +101,15 @@
                                        id="email"
                                        value = "{{$data['email']}}">
                                 @error('email')
-                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                <p class="text-red-500 text-md mt-1">{{$message}}</p>
                                 @enderror
 
                             </div>
 
 
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="password">
-                                   New password :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="password">
+                                    {{trans('translation.NewPassword')}} :
                                 </label>
                                 <input class="border border-gray-400 p-2 w-full"
                                        type="password"
@@ -116,15 +117,15 @@
                                        id="password"
                                        >
                                 @error('password')
-                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                <p class="text-red-500 text-md mt-1">{{$message}}</p>
                                 @enderror
 
                             </div>
 
 
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="role">
-                                    Role :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="role">
+                                    {{trans('translation.Role')}} :
                                 </label>
                                 <select name="role" id="role" class="border border-gray-400 p-2 w-full">
                                     <option value="user">User</option>
@@ -137,7 +138,7 @@
                             <div class="mb-6">
                                 <input type="hidden" name="userid" value={{$data['id']}}>
                                 <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
-                                    Submit
+                                    {{trans('translation.Submit')}}
                                 </button>
                             </div>
 
@@ -152,8 +153,8 @@
                         <form action="/admin" method="post">
                             @csrf
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="username">
-                                    username :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="username">
+                                    {{trans('translation.Username')}} :
                                 </label>
                                 <input class="border border-gray-400 p-2 w-full"
                                        type="text"
@@ -161,14 +162,14 @@
                                        id="username">
 
                                 @error('username')
-                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                <p class="text-red-500 text-md mt-1">{{$message}}</p>
                                 @enderror
                             </div>
 
 
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
-                                    email :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="email">
+                                    {{trans('translation.Email')}} :
                                 </label>
 
 
@@ -177,29 +178,29 @@
                                        name="email"
                                        id="email">
                                 @error('email')
-                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                <p class="text-red-500 text-md mt-1">{{$message}}</p>
                                 @enderror
 
                             </div>
 
 
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
-                                    New password :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="email">
+                                    {{trans('translation.NewPassword')}} :
                                 </label>
                                 <input class="border border-gray-400 p-2 w-full"
                                        type="password"
                                        name="password"
                                        id="password">
                                 @error('password')
-                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                <p class="text-red-500 text-md mt-1">{{$message}}</p>
                                 @enderror
                             </div>
 
 
                             <div class="mb-6">
-                                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="role">
-                                    Role :
+                                <label class="block mb-2 uppercase font-bold text-md text-gray-700" for="role">
+                                    {{trans('translation.Role')}} :
                                 </label>
                                 <select name="role" id="role" class="border border-gray-400 p-2 w-full">
                                     <option value="user">User</option>
@@ -211,7 +212,7 @@
 
                             <div class="mb-6">
                                 <button type="submit" name="operation" value="create" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
-                                    Submit
+                                    {{trans('translation.Submit')}}
                                 </button>
                             </div>
 

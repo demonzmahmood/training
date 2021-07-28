@@ -7,25 +7,26 @@
 
 
             @guest
-                <h1 class="text-center font-bold text-xl">Welcome Guest</h1>
+                <h1 class="text-center font-bold text-xl">{{trans('translation.WelcomeGuest')}}</h1>
             <div class="mb-6">
-                <a href="/login" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Login</a>
-                <a href="/register" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Register</a>
+                <a href="/login" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.Login')}}</a>
+                <a href="/register" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.Register')}}</a>
             </div>
             @endguest
 
             @role('user')
-                <h1 class="text-center font-bold text-xl">Welcome User</h1>
+
+                <h1 class="text-center font-bold text-xl">{{trans('translation.WelcomeUser')}}</h1>
             <div class="mb-6">
-                <a href="/user" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">User Dashboard</a>
+                <a href="/user" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.Dashboard')}}</a>
             </div>
             @endrole
 
 
             @role('admin')
-                <h1 class="text-center font-bold text-xl">Welcome Admin</h1>
+                <h1 class="text-center font-bold text-xl">{{trans('translation.WelcomeAdmin')}}</h1>
             <div class="mb-6">
-                <a href="/admin" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Admin Dashboard</a>
+                <a href="/admin" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">{{trans('translation.Dashboard')}}</a>
             </div>
             @endrole
 
